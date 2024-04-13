@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import axios from "./axios";
+import axios from 'axios';
 import requests from "./requests";
 import "./Banner.css";
 
 function Banner() {
   const [movie, setMovies] = useState([]);
+  const axiosinstance = axios.create({
+    baseURL: "https://api.themoviedb.org/3",
+  });
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(requests.fetchNetflixOriginals);
+      const request = await axiosinstance.get(requests.fetchNetflixOriginals);
       setMovies(
         request.data.results[
           Math.floor(Math.random() * request.data.results.length)
